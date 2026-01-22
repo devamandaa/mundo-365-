@@ -84,7 +84,7 @@ export default function Header() {
   );
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    const onScroll = () => setScrolled(window.scrollY > 10);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -101,25 +101,33 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50">
-      {/* glow superior */}
+      {/* brilho/ambiente igual ao Hero */}
       <div className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-[radial-gradient(circle_at_20%_0%,rgba(99,102,241,.22),transparent_55%),radial-gradient(circle_at_80%_0%,rgba(34,211,238,.18),transparent_55%)]" />
 
       <div
         className={cn(
           "relative transition-all",
-          scrolled
-            ? "bg-white/75 backdrop-blur-xl border-b border-slate-200 shadow-[0_8px_30px_rgba(15,23,42,.08)]"
-            : "bg-white/40 backdrop-blur-md border-b border-transparent"
+          // Sem scroll: transparente (integra com o Hero)
+          !scrolled &&
+            "bg-transparent",
+          // Com scroll: glass escuro no tom do Hero
+          scrolled &&
+            "bg-slate-950/35 backdrop-blur-xl border-b border-white/10 shadow-[0_10px_35px_rgba(0,0,0,.30)]"
         )}
       >
         <div className="mx-auto max-w-6xl px-4">
           <div className="flex h-16 items-center justify-between">
-            {/* LOGO COM IMAGEM */}
-            <a href="#inicio" className="group flex items-center">
+            {/* LOGO */}
+            <a href="#inicio" className="group flex items-center gap-3">
               <img
                 src={logoMundo365}
                 alt="Mundo365 Tecnologia"
-                className="h-8 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.03]"
+                className={cn(
+                  "h-8 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.03]",
+                  // Se o seu logo for escuro e sumir no fundo, descomenta esta linha:
+                  // "brightness-0 invert"
+                  ""
+                )}
               />
             </a>
 
@@ -129,10 +137,10 @@ export default function Header() {
                 <a
                   key={item.href}
                   href={item.href}
-                  className="relative px-4 py-2 text-sm font-semibold text-slate-700 transition hover:text-slate-900
+                  className="relative px-4 py-2 text-sm font-semibold text-white/85 transition hover:text-white
                              after:absolute after:left-4 after:right-4 after:-bottom-0.5 after:h-[2px]
                              after:origin-left after:scale-x-0 after:rounded-full
-                             after:bg-gradient-to-r after:from-indigo-600 after:to-cyan-400
+                             after:bg-gradient-to-r after:from-indigo-400 after:to-cyan-300
                              after:transition-transform hover:after:scale-x-100"
                 >
                   {item.label}
@@ -147,21 +155,25 @@ export default function Header() {
                 <button
                   type="button"
                   onClick={() => setLangOpen((v) => !v)}
-                  className="flex items-center gap-2 rounded-full border border-slate-200 bg-white/70 px-3 py-2 text-sm hover:bg-white transition shadow-[0_6px_18px_rgba(15,23,42,.06)]"
+                  className={cn(
+                    "flex items-center gap-2 rounded-full px-3 py-2 text-sm transition",
+                    "border border-white/20 bg-white/10 text-white/90 hover:bg-white/15",
+                    "backdrop-blur-xl shadow-[0_10px_25px_rgba(0,0,0,.18)]"
+                  )}
                 >
                   <BrazilFlag className="h-5 w-5" />
-                  <span className="font-semibold text-slate-800">PT</span>
-                  <ChevronDownIcon className="h-4 w-4 text-slate-500" />
+                  <span className="font-semibold">PT</span>
+                  <ChevronDownIcon className="h-4 w-4 text-white/70" />
                 </button>
 
                 {langOpen && (
-                  <div className="absolute right-0 mt-2 w-44 rounded-2xl border border-slate-200 bg-white shadow-[0_18px_45px_rgba(15,23,42,.12)]">
-                    <button className="w-full px-4 py-3 text-left text-sm hover:bg-slate-50">
+                  <div className="absolute right-0 mt-2 w-44 overflow-hidden rounded-2xl border border-white/15 bg-slate-950/55 backdrop-blur-xl shadow-[0_18px_45px_rgba(0,0,0,.35)]">
+                    <button className="w-full px-4 py-3 text-left text-sm text-white/90 hover:bg-white/10">
                       <div className="flex items-center gap-2">
                         <BrazilFlag className="h-5 w-5" />
                         <div>
                           <div className="font-semibold">Português</div>
-                          <div className="text-xs text-slate-500">Brasil</div>
+                          <div className="text-xs text-white/60">Brasil</div>
                         </div>
                       </div>
                     </button>
@@ -172,17 +184,21 @@ export default function Header() {
               {/* CTA */}
               <a
                 href="#contato"
-                className="hidden sm:inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-extrabold text-white
-                           bg-gradient-to-r from-indigo-600 to-cyan-400
-                           shadow-[0_12px_30px_rgba(34,211,238,.18)]
-                           hover:brightness-110 transition"
+                className={cn(
+                  "hidden sm:inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-extrabold text-white",
+                  "bg-gradient-to-r from-indigo-500 to-cyan-400",
+                  "shadow-[0_14px_35px_rgba(34,211,238,.22)] hover:brightness-110 transition"
+                )}
               >
                 Fale conosco
               </a>
 
               {/* MOBILE */}
               <button
-                className="md:hidden inline-flex items-center justify-center rounded-full border border-slate-200 bg-white/70 p-2 hover:bg-white transition"
+                className={cn(
+                  "md:hidden inline-flex items-center justify-center rounded-full p-2 transition",
+                  "border border-white/20 bg-white/10 text-white/90 hover:bg-white/15 backdrop-blur-xl"
+                )}
                 onClick={() => setMobileOpen((v) => !v)}
               >
                 {mobileOpen ? (
@@ -197,17 +213,25 @@ export default function Header() {
           {/* MENU MOBILE */}
           {mobileOpen && (
             <div className="md:hidden pb-4">
-              <div className="mt-2 rounded-2xl border border-slate-200 bg-white/80 backdrop-blur-xl shadow-[0_14px_35px_rgba(15,23,42,.10)]">
+              <div className="mt-2 overflow-hidden rounded-2xl border border-white/15 bg-slate-950/55 backdrop-blur-xl shadow-[0_18px_45px_rgba(0,0,0,.35)]">
                 {navItems.map((item) => (
                   <a
                     key={item.href}
                     href={item.href}
                     onClick={() => setMobileOpen(false)}
-                    className="block px-4 py-3 text-sm font-semibold text-slate-800 hover:bg-slate-50"
+                    className="block px-4 py-3 text-sm font-semibold text-white/90 hover:bg-white/10"
                   >
                     {item.label}
                   </a>
                 ))}
+
+                <a
+                  href="#contato"
+                  onClick={() => setMobileOpen(false)}
+                  className="block px-4 py-3 text-sm font-extrabold text-white bg-gradient-to-r from-indigo-500/70 to-cyan-400/70"
+                >
+                  Fale conosco
+                </a>
               </div>
             </div>
           )}
