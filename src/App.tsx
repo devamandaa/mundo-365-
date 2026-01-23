@@ -1,4 +1,4 @@
-import Header from "./components/Header";
+
 import Hero from "./components/Hero";
 import Solutions from "./components/Solutions";
 import Stats from "./components/Stats";
@@ -12,8 +12,7 @@ import "./index.css";
 function App() {
   return (
     <div className="min-h-screen bg-white text-slate-900">
-      {/* HEADER */}
-      <Header />
+      
 
       {/* CONTEÚDO PRINCIPAL */}
       <main>
