@@ -1,7 +1,6 @@
-
 import Hero from "./components/Hero";
 import Solutions from "./components/Solutions";
-import Stats from "./components/Stats";
+import WhyMundo365 from "./components/WhyMundo365";
 import Certifications from "./components/Certifications";
 import Awards from "./components/Awards";
 import Testimonials from "./components/Testimonials";
@@ -12,13 +11,11 @@ import "./index.css";
 function App() {
   return (
     <div className="min-h-screen bg-white text-slate-900">
-      
-
       {/* CONTEÚDO PRINCIPAL */}
       <main>
         <Hero />
         <Solutions />
-        <Stats />
+        <WhyMundo365 />
         <Certifications />
         <Awards />
         <Testimonials />

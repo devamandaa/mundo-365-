@@ -4,42 +4,42 @@ const items = [
     desc: "Rotinas automáticas, retenção segura e recuperação rápida de dados.",
     active: true,
     icon: "",
-    tone: "from-sky-400 to-indigo-500",
+    tone: "from-sky-500 to-indigo-600",
   },
   {
     title: "Suporte Técnico",
     desc: "Atendimento ágil, monitoramento contínuo e resposta proativa.",
     icon: "",
-    tone: "from-fuchsia-400 to-violet-500",
+    tone: "from-sky-500 to-cyan-600",
   },
   {
     title: "Consultoria Especializada",
     desc: "Planejamento estratégico, otimização e melhoria contínua.",
     icon: "",
-    tone: "from-indigo-400 to-sky-500",
+    tone: "from-sky-500 to-indigo-600",
   },
   {
     title: "Segurança da Informação",
     desc: "Proteção avançada, políticas de segurança e conformidade.",
     icon: "",
-    tone: "from-violet-400 to-fuchsia-500",
+    tone: "from-sky-500 to-cyan-600",
   },
   {
     title: "Cloud Microsoft Azure",
     desc: "Migração, gestão e operação em nuvem com alta disponibilidade.",
     icon: "",
-    tone: "from-sky-400 to-cyan-500",
+    tone: "from-sky-500 to-indigo-600",
   },
 ];
 
 export default function Solutions() {
   return (
-    <section id="solucoes" className="relative overflow-hidden bg-white py-24">
+    <section id="solucoes" className="relative overflow-hidden bg-white py-20">
       {/* FUNDO — BRANCO LIMPO */}
       <div className="absolute inset-0 bg-white" />
 
       <div className="relative mx-auto max-w-7xl px-6">
-        {/* HEADER */} 
+        {/* HEADER */}
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="mt-6 text-3xl font-extrabold tracking-tight text-slate-950 md:text-4xl">
             Nossas soluções
@@ -53,45 +53,53 @@ export default function Solutions() {
           </p>
         </div>
 
-        {/* MINI STATS */}
-        
-
         {/* GRID */}
-        <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {items.map((it) => (
             <div
               key={it.title}
               className={[
-                "group relative overflow-hidden rounded-3xl p-[1px] transition-all duration-300",
-                "hover:-translate-y-2",
+                "group relative overflow-hidden rounded-2xl p-[1px] transition-all duration-300",
+                "hover:-translate-y-1.5",
                 it.active
-                  ? "shadow-[0_30px_80px_rgba(99,102,241,.18)]"
-                  : "shadow-[0_25px_70px_rgba(2,6,23,.10)]",
+                  ? "shadow-[0_18px_55px_rgba(2,6,23,.12)]"
+                  : "shadow-[0_14px_45px_rgba(2,6,23,.10)]",
               ].join(" ")}
             >
-              {/* BORDA GRADIENTE */}
-              <div className="absolute inset-0 opacity-70 bg-[radial-gradient(circle_at_20%_20%,rgba(56,189,248,0.55),transparent_55%),radial-gradient(circle_at_80%_20%,rgba(168,85,247,0.55),transparent_55%),radial-gradient(circle_at_55%_95%,rgba(236,72,153,0.40),transparent_60%)]" />
-
-              {/* CARD */}
+              {/* BORDA (cinza -> azul no hover) */}
               <div
                 className={[
-                  "relative h-full rounded-3xl border border-slate-200/70 bg-white p-7",
-                  "transition-all duration-300",
-                  it.active ? "ring-2 ring-sky-400/30" : "",
+                  "absolute inset-0 opacity-100 transition-all duration-300",
+                  "bg-slate-200 group-hover:bg-sky-400",
+                ].join(" ")}
+              />
+
+              {/* CARD (menor + cinza -> azul no hover) */}
+              <div
+                className={[
+                  "relative h-full rounded-2xl border transition-all duration-300",
+                  // menor:
+                  "p-5 md:p-6",
+                  // default cinza:
+                  "border-slate-200 bg-slate-50",
+                  // hover azul:
+                  "group-hover:border-sky-400/60 group-hover:bg-sky-50",
+                  // destaque opcional:
+                  it.active ? "ring-2 ring-sky-400/20" : "",
                 ].join(" ")}
               >
-                {/* glow decorativo */}
-                <div className="pointer-events-none absolute -top-20 -right-20 h-44 w-44 rounded-full bg-fuchsia-400/15 blur-3xl" />
-                <div className="pointer-events-none absolute -bottom-24 -left-24 h-52 w-52 rounded-full bg-sky-400/12 blur-3xl" />
+                {/* glow (aparece no hover) */}
+                <div className="pointer-events-none absolute -top-16 -right-16 h-40 w-40 rounded-full bg-sky-400/0 blur-3xl transition-all duration-300 group-hover:bg-sky-400/20" />
+                <div className="pointer-events-none absolute -bottom-20 -left-20 h-48 w-48 rounded-full bg-sky-300/0 blur-3xl transition-all duration-300 group-hover:bg-sky-300/15" />
 
-                <div className="relative z-10 flex items-start gap-5">
+                <div className="relative z-10 flex items-start gap-4">
                   {/* ÍCONE */}
                   <div
                     className={[
-                      "flex h-12 w-12 items-center justify-center rounded-2xl text-base font-extrabold text-white",
+                      "flex h-11 w-11 items-center justify-center rounded-xl text-base font-extrabold text-white",
                       `bg-gradient-to-br ${it.tone}`,
-                      "shadow-[0_14px_35px_rgba(56,189,248,.18)]",
-                      "ring-1 ring-white/40",
+                      "shadow-[0_12px_28px_rgba(56,189,248,.20)]",
+                      "ring-1 ring-white/50",
                     ].join(" ")}
                   >
                     {it.icon}
@@ -100,9 +108,9 @@ export default function Solutions() {
                   {/* TEXTO */}
                   <div className="flex-1">
                     <div className="flex flex-wrap items-center gap-2">
-                      <h3 className="text-lg font-extrabold text-slate-950">{it.title}</h3>
+                      <h3 className="text-[15px] font-extrabold text-slate-950">{it.title}</h3>
                       {it.active && (
-                        <span className="inline-flex items-center rounded-full bg-sky-500/10 px-2.5 py-1 text-[11px] font-extrabold text-sky-700 ring-1 ring-sky-500/20">
+                        <span className="inline-flex items-center rounded-full bg-sky-500/10 px-2 py-0.5 text-[11px] font-extrabold text-sky-700 ring-1 ring-sky-500/20">
                           Destaque
                         </span>
                       )}
@@ -110,13 +118,19 @@ export default function Solutions() {
 
                     <p className="mt-2 text-sm leading-relaxed text-slate-700">{it.desc}</p>
 
-                    <div className="mt-5 h-px w-full bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
+                    <div className="mt-4 h-px w-full bg-gradient-to-r from-transparent via-slate-200 to-transparent group-hover:via-sky-200 transition" />
 
-                    <div className="mt-4 flex flex-wrap gap-2">
+                    <div className="mt-3 flex flex-wrap gap-2">
                       {["Confiabilidade", "Alta disponibilidade", "Escalabilidade"].map((tag) => (
                         <span
                           key={tag}
-                          className="rounded-full border border-slate-200/70 bg-white px-3 py-1 text-[11px] font-semibold text-slate-700"
+                          className={[
+                            "rounded-full border px-3 py-1 text-[11px] font-semibold transition-all duration-300",
+                            // default cinza:
+                            "border-slate-200 bg-white text-slate-700",
+                            // hover azul:
+                            "group-hover:border-sky-200 group-hover:bg-sky-50 group-hover:text-sky-900",
+                          ].join(" ")}
                         >
                           {tag}
                         </span>
@@ -126,12 +140,18 @@ export default function Solutions() {
                 </div>
 
                 {/* CTA */}
-                <div className="relative z-10 mt-6">
+                <div className="relative z-10 mt-5">
                   <button
-                    className="inline-flex items-center gap-2 rounded-full border border-slate-200 px-4 py-2 text-sm font-extrabold text-slate-900 bg-white hover:bg-slate-50 transition"
+                    className={[
+                      "inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-extrabold transition",
+                      // default cinza:
+                      "border-slate-200 bg-white text-slate-900 hover:bg-slate-100",
+                      // hover azul:
+                      "group-hover:border-sky-200 group-hover:bg-sky-600 group-hover:text-white group-hover:hover:bg-sky-700",
+                    ].join(" ")}
                     type="button"
                   >
-                    Ver detalhes <span className="text-slate-500">→</span>
+                    Ver detalhes <span className="opacity-80">→</span>
                   </button>
                 </div>
               </div>
@@ -140,7 +160,7 @@ export default function Solutions() {
         </div>
       </div>
 
-      <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-b from-transparent to-white" />
+      <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-b from-transparent to-white" />
     </section>
   );
 }
