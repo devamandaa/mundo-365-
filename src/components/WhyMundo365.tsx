@@ -1,10 +1,4 @@
-import mundoImg from "../assets/mundo.png.png"; // ✅ confira se o arquivo é mundo.png (sem .png.png)
-
-/**
- * Como usar imagem de fundo:
- * - Sua imagem está em: src/assets/mundo.png ✅
- * - Estamos importando ela acima e usando no bgImage.
- */
+import mundoImg from "../assets/mundo.png.png"; // ✅ confira o nome do arquivo
 
 type Stat = {
   value: string;
@@ -38,6 +32,11 @@ const certifications: Cert[] = [
 export default function WhyMundo365() {
   const bgImage = mundoImg;
 
+  // ✅ AJUSTE AQUI: desloca TODA a “constelação” (bolhas + linhas) para o centro
+  // Se ainda ficar levemente pra esquerda/direita, mexe nesses valores:
+  const clusterTranslateX = 6; // %  (ex: 4, 6, 8)
+  const clusterTranslateY = 0; // %  (ex: -2, 0, 2)
+
   return (
     <section className="bg-white">
       {/* HERO DARK */}
@@ -69,37 +68,45 @@ export default function WhyMundo365() {
 
           {/* Área dos stats (bolhas) */}
           <div className="relative mx-auto mt-10 h-[360px] max-w-5xl md:h-[420px]">
-            {/* Linhas / conexões (SVG) */}
-            <svg
-              className="absolute inset-0 h-full w-full opacity-60"
-              viewBox="0 0 100 100"
-              preserveAspectRatio="none"
-              aria-hidden="true"
+            {/* ✅ Wrapper que centraliza o conjunto inteiro (bolhas + linhas) */}
+            <div
+              className="absolute inset-0"
+              style={{
+                transform: `translate(${clusterTranslateX}%, ${clusterTranslateY}%)`,
+              }}
             >
-              <path
-                d="M14 26 L40 26 L66 26"
-                stroke="rgba(56,189,248,.65)"
-                strokeWidth="0.7"
-                fill="none"
-              />
-              <path
-                d="M40 26 L28 52 L40 74 L54 54 L40 26"
-                stroke="rgba(56,189,248,.45)"
-                strokeWidth="0.6"
-                fill="none"
-              />
-              <path
-                d="M28 52 L54 54"
-                stroke="rgba(56,189,248,.35)"
-                strokeWidth="0.6"
-                fill="none"
-              />
-            </svg>
+              {/* Linhas / conexões (SVG) */}
+              <svg
+                className="absolute inset-0 h-full w-full opacity-60"
+                viewBox="0 0 100 100"
+                preserveAspectRatio="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M14 26 L40 26 L66 26"
+                  stroke="rgba(56,189,248,.65)"
+                  strokeWidth="0.7"
+                  fill="none"
+                />
+                <path
+                  d="M40 26 L28 52 L40 74 L54 54 L40 26"
+                  stroke="rgba(56,189,248,.45)"
+                  strokeWidth="0.6"
+                  fill="none"
+                />
+                <path
+                  d="M28 52 L54 54"
+                  stroke="rgba(56,189,248,.35)"
+                  strokeWidth="0.6"
+                  fill="none"
+                />
+              </svg>
 
-            {/* Bolhas */}
-            {stats.map((s) => (
-              <StatBubble key={s.label} {...s} />
-            ))}
+              {/* Bolhas */}
+              {stats.map((s) => (
+                <StatBubble key={s.label} {...s} />
+              ))}
+            </div>
 
             {/* “Brilhos” extras */}
             <div className="pointer-events-none absolute -right-20 top-10 h-72 w-72 rounded-full bg-sky-400/10 blur-3xl" />
@@ -108,7 +115,7 @@ export default function WhyMundo365() {
         </div>
       </div>
 
-      {/* ✅ FAIXA MICROSOFT / CERTIFICAÇÕES (igual ao print) */}
+      {/* ✅ FAIXA MICROSOFT / CERTIFICAÇÕES */}
       <div className="relative -mt-16 z-20">
         <div className="mx-auto max-w-5xl rounded-2xl bg-white shadow-[0_20px_60px_rgba(2,6,23,.15)] ring-1 ring-slate-200">
           <div className="flex flex-col gap-6 px-8 py-6 md:flex-row md:items-center md:justify-between">
@@ -223,7 +230,7 @@ function StatBubble({ value, label, x, y }: Stat) {
           {label}
         </div>
 
-        {/* glow hover (opcional) */}
+        {/* glow hover */}
         <div className="pointer-events-none absolute -inset-6 rounded-full bg-sky-400/0 blur-2xl transition group-hover:bg-sky-400/15" />
       </div>
     </div>

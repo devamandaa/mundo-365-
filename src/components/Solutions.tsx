@@ -1,34 +1,66 @@
-const items = [
+// Solutions.tsx
+
+type SolutionItem = {
+  title: string;
+  desc: string;
+  active?: boolean;
+  icon: React.ReactNode; // pode ser emoji, texto ou componente SVG
+  tone: string; // classes do gradient do Tailwind
+  badge?: string;
+  tags?: string[];
+  ctaLabel?: string;
+};
+
+const items: SolutionItem[] = [
   {
     title: "Backup Gerenciado",
-    desc: "Rotinas automáticas, retenção segura e recuperação rápida de dados.",
+    desc: "O serviço de Backup Gerenciado consiste em guardar os dados de sua empresa com máxima segurança para que sejam restaurados no caso da perda dos originais.",
     active: true,
     icon: "",
     tone: "from-sky-500 to-indigo-600",
+    badge: "Mais usado",
+    tags: [""],
+    ctaLabel: "",
   },
   {
-    title: "Suporte Técnico",
-    desc: "Atendimento ágil, monitoramento contínuo e resposta proativa.",
+    title: "Business Inteligence",
+    desc: "Com a Mundo365 podemos criar incríveis soluções que de fato irão transformar a experiência de trabalho em sua empresa para uma forma mais moderna.",
     icon: "",
-    tone: "from-sky-500 to-cyan-600",
+    tone: "from-violet-500 to-fuchsia-600",
+    tags: [""],
+    ctaLabel: "",
   },
   {
-    title: "Consultoria Especializada",
-    desc: "Planejamento estratégico, otimização e melhoria contínua.",
+    title: "Planejamento e Migração",
+    desc: "O serviço de Migração consiste em migrar os dados de seu ambiente de trabalho de origem para a plataforma da Microsoft 365.",
     icon: "",
-    tone: "from-sky-500 to-indigo-600",
+    tone: "from-cyan-500 to-sky-600",
+    tags: [""],
+    ctaLabel: "",
   },
   {
-    title: "Segurança da Informação",
-    desc: "Proteção avançada, políticas de segurança e conformidade.",
+    title: "Área de Trabalho Virtual",
+    desc: "Conte com a Mundo365, um dos maiores Parceiros Microsoft do Brasil, para garantir produtividade de seus colaboradores em home-office.",
     icon: "",
-    tone: "from-sky-500 to-cyan-600",
+    tone: "from-emerald-500 to-teal-600",
+    tags: [""],
+    ctaLabel: "",
   },
   {
-    title: "Cloud Microsoft Azure",
-    desc: "Migração, gestão e operação em nuvem com alta disponibilidade.",
+    title: "Para Nuvem",
+    desc: "Transformação digital está acontecendo ao redor do mundo: contamos com um misto de novas tecnologias capacitadas e processos bem definidos.",
     icon: "",
-    tone: "from-sky-500 to-indigo-600",
+    tone: "from-blue-500 to-indigo-600",
+    tags: [""],
+    ctaLabel: "",
+  },
+  {
+    title: "Treinamento",
+    desc: "Treinamentos práticos e personalizados para capacitar equipes no uso eficiente das tecnologias, garantindo melhor desempenho, produtividade e adoção das soluções.",
+    icon: "",
+    tone: "from-orange-500 to-rose-600",
+    tags: [""],
+    ctaLabel: "",
   },
 ];
 
@@ -46,10 +78,7 @@ export default function Solutions() {
           </h2>
 
           <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-700 md:text-base">
-            Serviços premium para empresas que precisam de{" "}
-            <span className="font-semibold text-slate-900">estabilidade</span>,{" "}
-            <span className="font-semibold text-slate-900">performance</span> e{" "}
-            <span className="font-semibold text-slate-900">segurança</span> em ambientes críticos.
+            Confira abaixo as Soluções que a Mundo365 oferece para o seu ngócio atingir mais resultados com maior segurança.  
           </p>
         </div>
 
@@ -74,17 +103,13 @@ export default function Solutions() {
                 ].join(" ")}
               />
 
-              {/* CARD (menor + cinza -> azul no hover) */}
+              {/* CARD */}
               <div
                 className={[
                   "relative h-full rounded-2xl border transition-all duration-300",
-                  // menor:
                   "p-5 md:p-6",
-                  // default cinza:
                   "border-slate-200 bg-slate-50",
-                  // hover azul:
                   "group-hover:border-sky-400/60 group-hover:bg-sky-50",
-                  // destaque opcional:
                   it.active ? "ring-2 ring-sky-400/20" : "",
                 ].join(" ")}
               >
@@ -96,11 +121,12 @@ export default function Solutions() {
                   {/* ÍCONE */}
                   <div
                     className={[
-                      "flex h-11 w-11 items-center justify-center rounded-xl text-base font-extrabold text-white",
-                      `bg-gradient-to-br ${it.tone}`,
+                      "flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-base font-extrabold text-white",
+                      it.tone ? `bg-gradient-to-br ${it.tone}` : "bg-slate-900",
                       "shadow-[0_12px_28px_rgba(56,189,248,.20)]",
                       "ring-1 ring-white/50",
                     ].join(" ")}
+                    aria-hidden="true"
                   >
                     {it.icon}
                   </div>
@@ -108,52 +134,59 @@ export default function Solutions() {
                   {/* TEXTO */}
                   <div className="flex-1">
                     <div className="flex flex-wrap items-center gap-2">
-                      <h3 className="text-[15px] font-extrabold text-slate-950">{it.title}</h3>
-                      {it.active && (
+                      <h3 className="text-[15px] font-extrabold text-slate-950">
+                        {it.title}
+                      </h3>
+
+                      {/* BADGE só aparece se existir */}
+                      {it.badge && (
                         <span className="inline-flex items-center rounded-full bg-sky-500/10 px-2 py-0.5 text-[11px] font-extrabold text-sky-700 ring-1 ring-sky-500/20">
-                          Destaque
+                          {it.badge}
                         </span>
                       )}
                     </div>
 
-                    <p className="mt-2 text-sm leading-relaxed text-slate-700">{it.desc}</p>
+                    <p className="mt-2 text-sm leading-relaxed text-slate-700">
+                      {it.desc}
+                    </p>
 
-                    <div className="mt-4 h-px w-full bg-gradient-to-r from-transparent via-slate-200 to-transparent group-hover:via-sky-200 transition" />
+                    <div className="mt-4 h-px w-full bg-gradient-to-r from-transparent via-slate-200 to-transparent transition group-hover:via-sky-200" />
 
-                    <div className="mt-3 flex flex-wrap gap-2">
-                      {["Confiabilidade", "Alta disponibilidade", "Escalabilidade"].map((tag) => (
-                        <span
-                          key={tag}
-                          className={[
-                            "rounded-full border px-3 py-1 text-[11px] font-semibold transition-all duration-300",
-                            // default cinza:
-                            "border-slate-200 bg-white text-slate-700",
-                            // hover azul:
-                            "group-hover:border-sky-200 group-hover:bg-sky-50 group-hover:text-sky-900",
-                          ].join(" ")}
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
+                    {/* TAGS só aparecem se existir array e tiver itens */}
+                    {it.tags && it.tags.length > 0 && (
+                      <div className="mt-3 flex flex-wrap gap-2">
+                        {it.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className={[
+                              "rounded-full border px-3 py-1 text-[11px] font-semibold transition-all duration-300",
+                              "border-slate-200 bg-white text-slate-700",
+                              "group-hover:border-sky-200 group-hover:bg-sky-50 group-hover:text-sky-900",
+                            ].join(" ")}
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </div>
 
-                {/* CTA */}
-                <div className="relative z-10 mt-5">
-                  <button
-                    className={[
-                      "inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-extrabold transition",
-                      // default cinza:
-                      "border-slate-200 bg-white text-slate-900 hover:bg-slate-100",
-                      // hover azul:
-                      "group-hover:border-sky-200 group-hover:bg-sky-600 group-hover:text-white group-hover:hover:bg-sky-700",
-                    ].join(" ")}
-                    type="button"
-                  >
-                    Ver detalhes <span className="opacity-80">→</span>
-                  </button>
-                </div>
+                {/* CTA só aparece se tiver label */}
+                {it.ctaLabel && (
+                  <div className="relative z-10 mt-5">
+                    <button
+                      className={[
+                        "inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-extrabold transition",
+                        "border-slate-200 bg-white text-slate-900 hover:bg-slate-100",
+                        "group-hover:border-sky-200 group-hover:bg-sky-600 group-hover:text-white group-hover:hover:bg-sky-700",
+                      ].join(" ")}
+                      type="button"
+                    >
+                      {it.ctaLabel}
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           ))}
