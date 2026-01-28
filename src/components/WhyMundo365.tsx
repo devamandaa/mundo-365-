@@ -128,10 +128,10 @@ export default function WhyMundo365() {
               />
               <div>
                 <p className="text-sm font-extrabold text-slate-900">
-                  Somos um parceiro referenciado
+                  Somos a maior Revendedora Oficial Microsoft Brasil
                 </p>
                 <p className="text-sm font-extrabold text-sky-600">
-                  Official Microsoft Brasil
+                  Entre as maiores empresas de Revenda Microsoft do Brasil, oferecemos as melhores soluções com segurança. 
                 </p>
               </div>
             </div>
