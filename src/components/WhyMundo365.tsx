@@ -33,9 +33,8 @@ export default function WhyMundo365() {
   const bgImage = mundoImg;
 
   // ✅ AJUSTE AQUI: desloca TODA a “constelação” (bolhas + linhas) para o centro
-  // Se ainda ficar levemente pra esquerda/direita, mexe nesses valores:
-  const clusterTranslateX = 6; // %  (ex: 4, 6, 8)
-  const clusterTranslateY = 0; // %  (ex: -2, 0, 2)
+  const clusterTranslateX = 6; // %
+  const clusterTranslateY = 0; // %
 
   return (
     <section className="bg-white">
@@ -120,59 +119,49 @@ export default function WhyMundo365() {
         <div className="mx-auto max-w-5xl rounded-2xl bg-white shadow-[0_20px_60px_rgba(2,6,23,.15)] ring-1 ring-slate-200">
           <div className="flex flex-col gap-6 px-8 py-6 md:flex-row md:items-center md:justify-between">
             {/* LADO ESQUERDO */}
-            <div className="flex items-center gap-4">
-              <img
-                src="/certs/microsoft.svg"
-                alt="Microsoft"
-                className="h-10 w-auto"
-              />
-              <div>
-                <p className="text-sm font-extrabold text-slate-900">
-                  Somos a maior Revendedora Oficial Microsoft Brasil
+            <div className="flex flex-col items-center gap-3 text-center md:items-start md:text-left">
+              {/* LOGO MICROSOFT (4 quadrados) */}
+              <div className="flex items-center gap-3">
+                <MicrosoftMark size={14} />
+                <div className="text-sm font-extrabold text-slate-900">
+                  Microsoft
+                </div>
+              </div>
+
+              <div className="max-w-xl">
+                <p className="text-lg font-extrabold leading-tight text-sky-600 md:text-xl">
+                  Somos a maior Revendedora{" "}
+                  <span className="text-sky-700">Oficial Microsoft</span> Brasil
                 </p>
-                <p className="text-sm font-extrabold text-sky-600">
-                  Entre as maiores empresas de Revenda Microsoft do Brasil, oferecemos as melhores soluções com segurança. 
+
+                <p className="mt-2 text-sm font-semibold leading-relaxed text-slate-600">
+                  Entre as maiores empresas de Revenda Microsoft do Brasil, oferecemos
+                  as melhores soluções com segurança.
                 </p>
               </div>
             </div>
 
             {/* DIVISOR */}
-            <div className="hidden h-10 w-px bg-slate-200 md:block" />
+            <div className="hidden h-14 w-px bg-slate-200 md:block" />
 
-            {/* LADO DIREITO */}
-            <div className="flex flex-wrap items-center justify-center gap-3">
-              {[
-                "Microsoft",
-                "Microsoft Azure",
-                "Microsoft 365",
-                "Microsoft Security",
-                "Powered by Inteligência Artificial",
-              ].map((label) => (
-                <span
-                  key={label}
-                  className="rounded-full bg-slate-50 px-4 py-2 text-xs font-bold text-slate-700 ring-1 ring-slate-200"
-                >
-                  {label}
-                </span>
-              ))}
+            {/* ✅ LADO DIREITO (SEM IMAGENS — igual ao print) */}
+            <div className="flex flex-wrap items-start justify-center gap-10 md:justify-end">
+              <MsPartnerBadge subtitle="Modern Work" />
+              <MsPartnerBadge subtitle="Infrastructure" subtitle2="Azure" />
+              <MsPartnerBadge subtitle="Gold Partner" />
+
+              <div className="leading-tight text-slate-900">
+                <div className="text-lg font-extrabold">Powered BI</div>
+                <div className="text-base font-medium">Inteligência Artificial</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* CERTIFICAÇÕES */}
+      {/* CERTIFICAÇÕES (logos podem continuar como estão) */}
       <div className="relative">
         <div className="mx-auto max-w-7xl px-6 py-14">
-          <div className="mx-auto max-w-3xl text-center">
-            <h3 className="text-2xl font-extrabold text-slate-950">
-              Certificações e Qualificações
-            </h3>
-            <p className="mt-2 text-sm text-slate-600">
-              Reconhecimento e parcerias que reforçam nossa qualidade e confiança.
-            </p>
-          </div>
-
-          {/* Faixa com logos */}
           <div className="mx-auto mt-8 max-w-5xl rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <div className="flex flex-wrap items-center justify-center gap-6 opacity-90">
               {certifications.map((c) => (
@@ -182,7 +171,6 @@ export default function WhyMundo365() {
           </div>
         </div>
 
-        {/* acabamento */}
         <div className="h-10 bg-gradient-to-b from-white to-slate-50" />
       </div>
     </section>
@@ -191,10 +179,7 @@ export default function WhyMundo365() {
 
 function CertLogo({ name, src }: Cert) {
   return (
-    <div
-      className="grid h-12 w-32 place-items-center rounded-xl bg-slate-50 px-4"
-      title={name}
-    >
+    <div className="grid h-12 w-32 place-items-center rounded-xl bg-slate-50 px-4" title={name}>
       <img
         src={src}
         alt={name}
@@ -215,23 +200,65 @@ function StatBubble({ value, label, x, y }: Stat) {
       style={{ left: `${x}%`, top: `${y}%` }}
     >
       <div className="group relative">
-        {/* círculo */}
         <div className="grid h-16 w-16 place-items-center rounded-full border border-sky-300/40 bg-slate-950/25 text-sky-300 shadow-[0_0_0_6px_rgba(56,189,248,.08)] backdrop-blur md:h-20 md:w-20">
           <span className="text-lg font-extrabold tracking-tight md:text-xl">
             {value}
           </span>
         </div>
 
-        {/* pontinho decorativo */}
         <div className="absolute -right-1 -top-1 h-3 w-3 rounded-full bg-slate-200 ring-2 ring-slate-950/50" />
 
-        {/* label */}
         <div className="mt-2 w-max max-w-[140px] rounded-md bg-white/95 px-2 py-1 text-center text-[11px] font-extrabold text-sky-700 shadow-sm ring-1 ring-slate-200/70">
           {label}
         </div>
 
-        {/* glow hover */}
         <div className="pointer-events-none absolute -inset-6 rounded-full bg-sky-400/0 blur-2xl transition group-hover:bg-sky-400/15" />
+      </div>
+    </div>
+  );
+}
+
+/* ===========================
+   ✅ SEM IMAGENS (1:1 do print)
+   =========================== */
+
+function MicrosoftMark({ size = 12 }: { size?: number }) {
+  return (
+    <span className="grid grid-cols-2 gap-[2px]">
+      <span style={{ width: size, height: size }} className="bg-[#F25022]" />
+      <span style={{ width: size, height: size }} className="bg-[#7FBA00]" />
+      <span style={{ width: size, height: size }} className="bg-[#00A4EF]" />
+      <span style={{ width: size, height: size }} className="bg-[#FFB900]" />
+    </span>
+  );
+}
+
+function MsPartnerBadge({
+  subtitle,
+  subtitle2,
+}: {
+  subtitle: string;
+  subtitle2?: string;
+}) {
+  return (
+    <div className="flex items-start gap-3">
+      <MicrosoftMark size={12} />
+
+      <div className="leading-tight">
+        <div className="text-sm font-semibold text-slate-700">
+          Microsoft{" "}
+          <span className="font-medium text-slate-600">Solutions Partner</span>
+        </div>
+
+        <div className="mt-1 text-xs font-semibold text-slate-500">
+          {subtitle}
+          {subtitle2 ? (
+            <>
+              <br />
+              {subtitle2}
+            </>
+          ) : null}
+        </div>
       </div>
     </div>
   );
