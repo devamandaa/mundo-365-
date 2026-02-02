@@ -5,7 +5,6 @@ type Solution = {
   title: string;
   desc: string;
   icon: React.ReactNode;
-  featured?: boolean; // fica azul fixo (Backup)
 };
 
 const solutionsLeft: Solution[] = [
@@ -13,7 +12,6 @@ const solutionsLeft: Solution[] = [
     title: "Backup Gerenciado",
     desc:
       "O serviço de Backup Gerenciado consiste em guardar os dados de sua empresa com máxima segurança para que sejam restaurados no caso da perda dos originais.",
-    featured: true,
     icon: <IconCloud />,
   },
   {
@@ -55,7 +53,7 @@ export default function Solutions() {
   return (
     <section id="solucoes" className="relative bg-white py-20">
       <div className="mx-auto max-w-6xl px-6">
-        {/* HEADER (igual vibe do print) */}
+        {/* HEADER */}
         <div className="text-center">
           <h2 className="text-3xl font-extrabold tracking-tight text-sky-600 md:text-4xl">
             Nossas soluções
@@ -73,19 +71,16 @@ export default function Solutions() {
           </p>
         </div>
 
-        {/* LAYOUT 2 COLUNAS (igual ao print) */}
+        {/* GRID */}
         <div className="mt-14 grid gap-6 md:grid-cols-2">
           {/* COLUNA ESQUERDA */}
           <div className="flex flex-col gap-6">
-            {/* CARD GRANDE (AZUL) */}
             <SolutionCard size="lg" data={solutionsLeft[0]} />
-
-            {/* DOIS CARDS CINZA */}
             <SolutionCard size="sm" data={solutionsLeft[1]} />
             <SolutionCard size="sm" data={solutionsLeft[2]} />
           </div>
 
-          {/* COLUNA DIREITA (3 CARDS) */}
+          {/* COLUNA DIREITA */}
           <div className="flex flex-col gap-6">
             {solutionsRight.map((s) => (
               <SolutionCard key={s.title} size="sm" data={s} />
@@ -97,7 +92,7 @@ export default function Solutions() {
   );
 }
 
-/* ---------------- CARD (igual ao print) ---------------- */
+/* ---------------- CARD ---------------- */
 
 function SolutionCard({
   data,
@@ -106,24 +101,20 @@ function SolutionCard({
   data: Solution;
   size: "lg" | "sm";
 }) {
-  const isFeatured = !!data.featured;
-
   return (
     <article
       className={[
         "group relative overflow-hidden rounded-xl shadow-[0_10px_20px_rgba(0,0,0,.18)]",
-        isFeatured
-          ? "bg-[#0b86b6] text-white"
-          : "bg-[#cfcfcf] text-slate-900 hover:bg-[#0b86b6] hover:text-white",
+        "bg-[#cfcfcf] text-slate-900 hover:bg-[#0b86b6] hover:text-white",
         size === "lg" ? "min-h-[150px]" : "min-h-[120px]",
         "transition-colors duration-300",
       ].join(" ")}
     >
-      {/* detalhe diagonal (o “corte” cinza da direita) */}
+      {/* detalhe diagonal */}
       <div
         className={[
           "pointer-events-none absolute inset-y-0 right-0 w-[42%]",
-          isFeatured ? "opacity-20" : "opacity-35 group-hover:opacity-20",
+          "opacity-35 group-hover:opacity-20",
           "transition-opacity duration-300",
         ].join(" ")}
       >
@@ -132,16 +123,8 @@ function SolutionCard({
       </div>
 
       <div className="relative z-10 flex gap-4 p-5">
-        {/* ícone (igual: pequeno no topo/esquerda) */}
-        <div
-          className={[
-            "mt-0.5 grid h-10 w-10 place-items-center rounded-md",
-            isFeatured
-              ? "text-white"
-              : "text-slate-700 group-hover:text-white",
-            "transition-colors duration-300",
-          ].join(" ")}
-        >
+        {/* ícone */}
+        <div className="mt-0.5 grid h-10 w-10 place-items-center text-slate-700 group-hover:text-white transition-colors duration-300">
           {data.icon}
         </div>
 
@@ -156,15 +139,7 @@ function SolutionCard({
             {data.title}
           </h3>
 
-          <p
-            className={[
-              "mt-2 text-xs leading-relaxed",
-              isFeatured
-                ? "text-white/90"
-                : "text-slate-700 group-hover:text-white/90",
-              "transition-colors duration-300",
-            ].join(" ")}
-          >
+          <p className="mt-2 text-xs leading-relaxed text-slate-700 group-hover:text-white/90 transition-colors duration-300">
             {data.desc}
           </p>
         </div>
@@ -173,11 +148,11 @@ function SolutionCard({
   );
 }
 
-/* ---------------- ICONS (simples, igual ao estilo do print) ---------------- */
+/* ---------------- ICONS ---------------- */
 
 function IconCloud() {
   return (
-    <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true">
+    <svg width="26" height="26" viewBox="0 0 24 24">
       <path
         d="M7 18h10a4 4 0 0 0 .6-8A5 5 0 0 0 8 8.6 3.5 3.5 0 0 0 7 18Z"
         fill="none"
@@ -200,20 +175,13 @@ function IconCloud() {
 
 function IconBulb() {
   return (
-    <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true">
-      <path
-        d="M9 18h6m-5 3h4"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-      />
+    <svg width="26" height="26" viewBox="0 0 24 24">
+      <path d="M9 18h6m-5 3h4" fill="none" stroke="currentColor" strokeWidth="1.8" />
       <path
         d="M12 3a7 7 0 0 0-4 12c.6.5 1 1.2 1 2h6c0-.8.4-1.5 1-2A7 7 0 0 0 12 3Z"
         fill="none"
         stroke="currentColor"
         strokeWidth="1.8"
-        strokeLinejoin="round"
       />
     </svg>
   );
@@ -221,7 +189,7 @@ function IconBulb() {
 
 function IconGear() {
   return (
-    <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true">
+    <svg width="26" height="26" viewBox="0 0 24 24">
       <path
         d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"
         fill="none"
@@ -233,7 +201,6 @@ function IconGear() {
         fill="none"
         stroke="currentColor"
         strokeWidth="1.2"
-        strokeLinejoin="round"
         opacity="0.85"
       />
     </svg>
@@ -242,22 +209,18 @@ function IconGear() {
 
 function IconCloudArrow() {
   return (
-    <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true">
+    <svg width="26" height="26" viewBox="0 0 24 24">
       <path
         d="M7 18h10a4 4 0 0 0 .6-8A5 5 0 0 0 8 8.6 3.5 3.5 0 0 0 7 18Z"
         fill="none"
         stroke="currentColor"
         strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
       />
       <path
         d="M12 7v6m0-6l-2 2m2-2l2 2"
         fill="none"
         stroke="currentColor"
         strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
       />
     </svg>
   );
@@ -265,57 +228,20 @@ function IconCloudArrow() {
 
 function IconTraining() {
   return (
-    <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true">
-      <path
-        d="M4 6h16v10H4z"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M8 20h8"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-      />
-      <path
-        d="M9 11l2 2 4-4"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+    <svg width="26" height="26" viewBox="0 0 24 24">
+      <path d="M4 6h16v10H4z" fill="none" stroke="currentColor" strokeWidth="1.8" />
+      <path d="M8 20h8" fill="none" stroke="currentColor" strokeWidth="1.8" />
+      <path d="M9 11l2 2 4-4" fill="none" stroke="currentColor" strokeWidth="1.8" />
     </svg>
   );
 }
 
 function IconMonitor() {
   return (
-    <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true">
-      <path
-        d="M4 5h16v10H4z"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M9 19h6"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-      />
-      <path
-        d="M12 15v4"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-      />
+    <svg width="26" height="26" viewBox="0 0 24 24">
+      <path d="M4 5h16v10H4z" fill="none" stroke="currentColor" strokeWidth="1.8" />
+      <path d="M9 19h6" fill="none" stroke="currentColor" strokeWidth="1.8" />
+      <path d="M12 15v4" fill="none" stroke="currentColor" strokeWidth="1.8" />
     </svg>
   );
 }

@@ -3,7 +3,7 @@ import Solutions from "./components/Solutions";
 import WhyMundo365 from "./components/WhyMundo365";
 import Certifications from "./components/Certifications";
 import Testimonials from "./components/Testimonials";
-import Partners from "./components/Partners";
+
 import Footer from "./components/Footer";
 import "./index.css";
 
@@ -18,7 +18,7 @@ function App() {
         <WhyMundo365 />
         <Certifications />
         <Testimonials />
-        <Partners />
+       
       </main>
         
 
