@@ -226,42 +226,81 @@ function HeroVisualNoImage() {
 }
 
 /* ---------------- AZURE A (SVG EM CÓDIGO) ---------------- */
+/* ---------------- AZURE A — IGUAL AO DA FOTO ---------------- */
 function AzureA({ className = "" }: { className?: string }) {
   return (
-    <svg viewBox="0 0 256 256" aria-hidden="true" className={className} fill="none">
+    <svg
+      viewBox="0 0 320 300"
+      aria-hidden="true"
+      className={className}
+      fill="none"
+    >
       <defs>
-        <linearGradient id="az1" x1="40" y1="20" x2="220" y2="240">
-          <stop offset="0" stopColor="#00C6F7" />
-          <stop offset="0.55" stopColor="#0EA5E9" />
-          <stop offset="1" stopColor="#2563EB" />
+        {/* Gradiente principal (lado claro) */}
+        <linearGradient id="azMain" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#22D3EE" />
+          <stop offset="100%" stopColor="#0EA5E9" />
         </linearGradient>
 
-        <linearGradient id="az2" x1="30" y1="40" x2="170" y2="220">
-          <stop offset="0" stopColor="#0B5AA7" />
-          <stop offset="1" stopColor="#0B3B8C" />
+        {/* Gradiente sombra (lado escuro) */}
+        <linearGradient id="azDark" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#0B5AA7" />
+          <stop offset="100%" stopColor="#083A78" />
         </linearGradient>
 
-        <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
-          <feDropShadow dx="0" dy="12" stdDeviation="10" floodOpacity="0.25" />
+        {/* Sombra suave */}
+        <filter id="azShadow" x="-30%" y="-30%" width="160%" height="160%">
+          <feDropShadow
+            dx="0"
+            dy="20"
+            stdDeviation="18"
+            floodColor="#000000"
+            floodOpacity="0.35"
+          />
         </filter>
       </defs>
 
+      {/* PARTE ESCURA (lado esquerdo do A) */}
       <path
-        filter="url(#shadow)"
-        d="M158 20c10 0 18 8 18 18v156c0 9-7 16-16 16h-26c-9 0-16-7-16-16V78c0-2-2-3-3-1L70 214c-3 6-9 10-16 10H28c-12 0-20-12-15-23L96 46c4-9 13-26 32-26h30Z"
-        fill="url(#az1)"
+        filter="url(#azShadow)"
+        d="
+          M110 30
+          L40 260
+          H95
+          L140 120
+          L185 260
+          H235
+          L165 30
+          Z
+        "
+        fill="url(#azDark)"
       />
 
+      {/* PARTE CLARA (lado direito do A) */}
       <path
-        d="M128 46c-8 0-15 5-18 12L55 178c-2 5 1 10 6 10h26c6 0 11-3 13-8l13-31h55c5 0 9-4 9-9V55c0-5-4-9-9-9h-40Z"
-        fill="url(#az2)"
-        opacity="0.95"
+        d="
+          M165 30
+          L235 30
+          L300 260
+          H245
+          L205 140
+          L165 260
+          H115
+          Z
+        "
+        fill="url(#azMain)"
       />
 
+      {/* RECORTE INTERNO (formato do A) */}
       <path
-        d="M111 152l18-42c1-2 4-2 5 0l11 23c2 3 0 7-4 7h-24c-4 0-7-4-6-8Z"
+        d="
+          M150 150
+          L210 190
+          L170 190
+          Z
+        "
         fill="#0EA5E9"
-        opacity="0.35"
+        opacity="0.9"
       />
     </svg>
   );

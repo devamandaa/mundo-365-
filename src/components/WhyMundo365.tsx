@@ -30,8 +30,9 @@ const stats: Stat[] = [
 =========================== */
 
 export default function WhyMundo365() {
-  const clusterTranslateX = 6;
-  const clusterTranslateY = 0;
+  // 🔴 AJUSTE PRINCIPAL (leva tudo pro lado direito)
+  const clusterTranslateX = 28; // quanto maior, mais pra direita
+  const clusterTranslateY = 2;  // ajuste fino vertical
 
   return (
     <section className="bg-white">
@@ -58,6 +59,7 @@ export default function WhyMundo365() {
             <div className="mx-auto mt-3 h-1 w-24 rounded-full bg-sky-400/90" />
           </div>
 
+          {/* ================= CLUSTER ================= */}
           <div className="relative mx-auto mt-10 h-[360px] max-w-5xl md:h-[420px]">
             <div
               className="absolute inset-0"
@@ -65,6 +67,7 @@ export default function WhyMundo365() {
                 transform: `translate(${clusterTranslateX}%, ${clusterTranslateY}%)`,
               }}
             >
+              {/* LINHAS */}
               <svg
                 className="absolute inset-0 h-full w-full opacity-60"
                 viewBox="0 0 100 100"
@@ -90,6 +93,7 @@ export default function WhyMundo365() {
                 />
               </svg>
 
+              {/* BOLHAS */}
               {stats.map((s) => (
                 <StatBubble key={s.label} {...s} />
               ))}
@@ -99,58 +103,54 @@ export default function WhyMundo365() {
       </div>
 
       {/* ================= FAIXA MICROSOFT ================= */}
-    <div className="relative z-20 -mt-16 px-6">
-  {/* ✅ Wrapper que “isola” do fundo e fecha o card 100% */}
-  <div className="mx-auto max-w-5xl rounded-2xl bg-white p-[1px] shadow-[0_20px_60px_rgba(2,6,23,.15)]">
-    <div className="rounded-2xl bg-white ring-1 ring-slate-200 overflow-hidden">
-      <div className="flex flex-col gap-6 px-8 py-6 md:flex-row md:items-center md:justify-between">
-        {/* LADO ESQUERDO */}
-        <div className="flex flex-col items-center gap-3 text-center md:items-start md:text-left">
-          <div className="flex items-center gap-3">
-            <MicrosoftMark size={14} />
-            <div className="text-sm font-extrabold text-slate-900">
-              Microsoft
-            </div>
-          </div>
+      <div className="relative z-20 -mt-16 px-6">
+        <div className="mx-auto max-w-6xl rounded-2xl bg-white shadow-[0_20px_60px_rgba(2,6,23,.15)]">
+          <div className="overflow-hidden rounded-2xl ring-1 ring-slate-200">
+            <div className="flex flex-col items-center gap-8 px-10 py-8 md:flex-row md:justify-between">
+              {/* LADO ESQUERDO */}
+              <div className="flex max-w-xl flex-col gap-3 text-center md:text-left">
+                <div className="flex items-center justify-center gap-3 md:justify-start">
+                  <MicrosoftMark size={18} />
+                  <span className="text-sm font-extrabold text-slate-900">
+                    Microsoft
+                  </span>
+                </div>
 
-          <div className="max-w-xl">
-            <p className="text-lg font-extrabold leading-tight text-sky-600 md:text-xl">
-              Somos a maior Revendedora{" "}
-              <span className="text-sky-700">Oficial Microsoft</span> Brasil
-            </p>
+                <p className="text-xl font-extrabold leading-tight text-sky-600">
+                  Somos a maior Revendedora <br />
+                  <span className="text-sky-700">
+                    Oficial Microsoft Brasil
+                  </span>
+                </p>
 
-            <p className="mt-2 text-sm font-semibold leading-relaxed text-slate-600">
-              Entre as maiores empresas de Revenda Microsoft do Brasil,
-              oferecemos as melhores soluções com segurança.
-            </p>
-          </div>
-        </div>
+                <p className="text-sm font-medium leading-relaxed text-slate-600">
+                  Entre as maiores empresas de Revenda Microsoft do Brasil,
+                  oferecemos as melhores soluções com segurança.
+                </p>
+              </div>
 
-        {/* DIVISOR */}
-        <div className="hidden h-14 w-px bg-slate-200 md:block" />
+              {/* DIVISOR */}
+              <div className="hidden h-16 w-[2px] bg-orange-400 md:block" />
 
-        {/* LADO DIREITO */}
-        <div className="w-full md:w-auto">
-          <div className="grid items-center gap-x-10 gap-y-6 sm:grid-cols-2 md:grid-cols-4 md:gap-y-0">
-            <MsPartnerBadge subtitle="Modern Work" />
-            <MsPartnerBadge subtitle="Infrastructure" subtitle2="Azure" />
-            <MsPartnerBadge subtitle="Gold Partner" />
+              {/* LADO DIREITO */}
+              <div className="grid items-center gap-x-10 gap-y-6 sm:grid-cols-2 md:grid-cols-4 md:gap-y-0">
+                <MsPartnerBadge subtitle="Modern Work" />
+                <MsPartnerBadge subtitle="Infrastructure" subtitle2="Azure" />
+                <MsPartnerBadge subtitle="Gold Partner" />
 
-            <div className="min-w-[170px] leading-[1.1] text-slate-900">
-              <div className="text-[15px] font-extrabold">Powered BI</div>
-              <div className="mt-1 text-[13px] font-semibold text-slate-700">
-                Inteligência Artificial
+                <div className="min-w-[160px] text-left leading-tight">
+                  <div className="text-[15px] font-extrabold text-slate-900">
+                    Powered BI
+                  </div>
+                  <div className="mt-1 text-[13px] font-semibold text-slate-700">
+                    Inteligência Artificial
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
-
-
-      {/* ✅ (removi a seção CERTIFICAÇÕES inteira) */}
     </section>
   );
 }
@@ -168,18 +168,22 @@ function MsPartnerBadge({
 }) {
   return (
     <div className="flex min-w-[170px] items-center gap-3">
-      <MicrosoftMark size={12} />
-      <div className="leading-[1.1]">
-        <div className="text-[13px] font-semibold text-slate-700">
-          Microsoft{" "}
-          <span className="font-medium text-slate-600">Solutions Partner</span>
+      <MicrosoftMark size={22} />
+
+      <div className="leading-tight">
+        <div className="text-[12.5px] font-extrabold text-slate-900">
+          Microsoft
         </div>
-        <div className="mt-1 text-[12px] font-semibold text-slate-500">
+        <div className="text-[12.5px] font-extrabold text-slate-900">
+          Solutions Partner
+        </div>
+
+        <div className="mt-1 text-[12px] font-semibold text-slate-600">
           {subtitle}
           {subtitle2 && (
             <>
-              <br />
-              {subtitle2}
+              <span className="mx-1 text-slate-400">|</span>
+              <span className="text-slate-700">{subtitle2}</span>
             </>
           )}
         </div>
@@ -188,13 +192,30 @@ function MsPartnerBadge({
   );
 }
 
-function MicrosoftMark({ size = 12 }: { size?: number }) {
+function MicrosoftMark({ size = 18 }: { size?: number }) {
+  const s = size;
+  const gap = Math.max(2, Math.round(s * 0.12));
+  const box = Math.round((s - gap) / 2);
+
   return (
-    <span className="grid grid-cols-2 gap-[2px]">
-      <span style={{ width: size, height: size }} className="bg-[#F25022]" />
-      <span style={{ width: size, height: size }} className="bg-[#7FBA00]" />
-      <span style={{ width: size, height: size }} className="bg-[#00A4EF]" />
-      <span style={{ width: size, height: size }} className="bg-[#FFB900]" />
+    <span className="inline-flex">
+      <svg
+        width={s}
+        height={s}
+        viewBox={`0 0 ${s} ${s}`}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <rect x="0" y="0" width={box} height={box} fill="#F25022" />
+        <rect x={box + gap} y="0" width={box} height={box} fill="#7FBA00" />
+        <rect x="0" y={box + gap} width={box} height={box} fill="#00A4EF" />
+        <rect
+          x={box + gap}
+          y={box + gap}
+          width={box}
+          height={box}
+          fill="#FFB900"
+        />
+      </svg>
     </span>
   );
 }
@@ -207,7 +228,9 @@ function StatBubble({ value, label, x, y }: Stat) {
     >
       <div className="group relative">
         <div className="grid h-16 w-16 place-items-center rounded-full border border-sky-300/40 bg-slate-950/25 text-sky-300 backdrop-blur md:h-20 md:w-20">
-          <span className="text-lg font-extrabold md:text-xl">{value}</span>
+          <span className="text-lg font-extrabold md:text-xl">
+            {value}
+          </span>
         </div>
 
         <div className="mt-2 w-max rounded-md bg-white/95 px-2 py-1 text-[11px] font-extrabold text-sky-700 shadow-sm">
